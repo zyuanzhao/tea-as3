@@ -66,11 +66,12 @@
 				for (var mapID in mapList) {
 					//(mapList[mapID].lockInMap(obj.pos).distance(obj.pos), mapList[mapID].lockInMap(nextPoint).distance(obj.pos));
 					
-					//if (mapList[mapID].lockInMap(obj.pos).distance(obj.pos) < 1 ||
-						//mapList[mapID].lockInMap(nextPoint).distance(obj.pos) < 1) {
+					if (mapList[mapID].lockInMap(obj.pos).distance(obj.pos) < 1 ||
+						mapList[mapID].lockInMap(nextPoint).distance(obj.pos) < 1) {
 						phyMapList.push(mapID);
-					//}
+					}
 				}
+				//trace(phyMapList)
 				for (mapID in phyMapList) {
 					var map:Map25d = mapList[phyMapList[mapID]];
 					var currentLand:int = map.findArea(obj.pos);
@@ -104,9 +105,10 @@
 					
 					obj.bottomLand = map.findArea(nextPoint);
 					obj.bottomY = map.findLandY(nextPoint, obj.bottomLand);
+				}
+				if (phyMapList.length==0) {
 					
 				}
-
 				obj.pos = nextPoint;
 			}
 		}

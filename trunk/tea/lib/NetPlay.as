@@ -23,6 +23,13 @@ package tea.lib{
 			}
 			return Shared;
 		}
+		public function get connected(): Boolean {
+			if (S == null) return false;
+			return S.connected;
+		}
+		public function cut():void {
+			S.close();
+		}
 		public function connect(_ip:String, _port:uint) :void {
 			S = new Socket();
 			S.addEventListener(ProgressEvent.SOCKET_DATA, socketDataHandler);

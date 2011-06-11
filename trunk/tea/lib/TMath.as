@@ -17,17 +17,19 @@ package tea.lib{
 			}
 			return Math.atan((pt.y - _o.y) / (pt.x - _o.x));
 		}
-		static public function limit(num:Number,min:Number,max:Number=Infinity,border:Number=0):Number {
+		static public function limit(num:Number,min:Number=0,max:Number=Infinity,border:Number=0):Number {
 			return Math.max(min+border,Math.min(max-border,num));
 		}
 		static public function crop(num:Number):Number {
 			return Math.round(num * 10) / 10;
 		}
-		static public function flipAngle(r:Number,xy:String):Number {
+		static public function flipAngle(r:Number,xy):Number {
 			if (xy=='x') {
 				return inCircle(2 * Math.PI - r);
-			} else {
+			} else if (xy=='y'){
 				return inCircle(2 * Math.PI - inCircle(r - Math.PI / 2) + Math.PI / 2);
+			}else {
+				return inCircle(2 * Math.PI - inCircle(r - xy) + xy);
 			}
 		}
 		static public function inCircle(a:Number):Number {
@@ -56,6 +58,10 @@ package tea.lib{
 		}
 		static public function abs(r) {
 			return r / Math.abs(r);
+		}
+		static function similar(a:Number, b:Number, rate:Number = 0.99):Boolean {
+			if(a==b)return true
+			return Math.min(a, b) / Math.max(a, b) >= rate;
 		}
 	}
 }
